@@ -1,0 +1,4 @@
+model_checkpoint_path: "Movie.ckpt-5000"
+all_model_checkpoint_paths: "Movie.ckpt-4800"
+all_model_checkpoint_paths: "Movie.ckpt-4900"
+all_model_checkpoint_paths: "Movie.ckpt-5000"
