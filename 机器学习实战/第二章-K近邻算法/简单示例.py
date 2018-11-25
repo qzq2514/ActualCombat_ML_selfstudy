@@ -23,8 +23,8 @@ def createData():
 
 def drawData(dataSet,labels):
     clusters=[]
-    for kk in range(len(labelsTag)):
-        ind=(labels==labelsTag[kk])
+    for tag in labelsTag:
+        ind=(labels==tag)
         line=plt.scatter(dataSet[ind, 0], dataSet[ind, 1])
         clusters.append(line)
     plt.legend(clusters,labelsTag,loc = 'upper right')
