@@ -70,11 +70,26 @@ def AdaBoostTrain(dataMat,label,iteraNum=40):
             break
     return weakClassifyArray
 
+def adaClassify(dataPred,weakClassifies):
+    m=dataPred.shape[0]
+    retClass=np.zeros((m,1))
+    for classify in weakClassifies:
+        curRes=SinglefeatureClassify(dataPred,classify['dimen'],classify['thresh'],classify['invChoice'])
+        retClass+=classify['alpha']*curRes    #每一个弱分类器结果的加权求和即得到最后的预测分类结果(此时retClass是连续型向量)
+        # print(retClass)
+    return np.sign(retClass)      #连续型向量变为离散类别
+
+
+
 data,label=getSimpleData()
 label=np.array(label)[:,np.newaxis]
 
 weakClassifyArray=AdaBoostTrain(data,label)
+testData=np.array([[0,0],[5,5]])
+res=adaClassify(testData,weakClassifyArray)
+print(res)
 
+# print(weakClassifyArray)
 # sampleW=np.ones((data.shape[0],1))/data.shape[0]
 # classsfy,minError,newLabel=getBestFeatureInfo(data,label,sampleW)
 # print(minError)
